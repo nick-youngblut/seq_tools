@@ -18,8 +18,8 @@ Commands:
   fasta_info     General info on fasta file
   fasta_unwrap   Unwrap a fasta file
   filter_seq     Filter sequences
-  seqIntersect   Intersection of 2 sequence files
-  
+  nseq           Quick get number of sequence in a file
+  seqIntersect   Intersection of 2 sequence files  
 
 Description:
   This is the main command to call various scripts associated with this project.
