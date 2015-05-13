@@ -20,6 +20,7 @@ Commands:
   filter_seq     Filter sequences
   nseq           Quick get number of sequence in a file
   seqIntersect   Intersection of 2 sequence files  
+  Tm_calc        Calculating melting temperature
 
 Description:
   This is the main command to call various scripts associated with this project.
