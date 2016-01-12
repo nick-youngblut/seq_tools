@@ -13,10 +13,14 @@ cd seq_tools
 
 ### set up paths; add bash completion
 
+The command below will add the `seq_tools`
+command to your PATH and add bash completion
+for viewing subcommands when typing <tab> (much like git).
+NOTE: you MUST run the command in the "seq_tools" directory.
+
 ~~~
 echo 'source '`pwd`'/sourceMe' >> ~/.bashrc
 ~~~
-
 
 # SUPPORT AND DOCUMENTATION
 

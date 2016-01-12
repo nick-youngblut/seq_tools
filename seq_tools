@@ -18,6 +18,7 @@ Commands:
   fasta_info     General info on fasta file
   fasta_unwrap   Unwrap a fasta file
   filter_seq     Filter sequences
+  GC_content     Calculate GC content of >1 sequence
   nseq           Quick get number of sequence in a file
   seqIntersect   Intersection of 2 sequence files  
   Tm_calc        Calculating melting temperature

@@ -30,7 +30,11 @@ import pyfasta
 
 
 def main(uargs):
-    f = pyfasta.Fasta(uargs['<fastaFile>'])
+    try:
+        f = pyfasta.Fasta(uargs['<fastaFile>'])
+    except ValueError:
+        msg = 'ERROR: Could not read genome file: {}'
+        sys.exit(msg.format(uargs['<fastaFile>']))
 
     info = [(k, len(seq)) for k,seq in f.iteritems()]
 
