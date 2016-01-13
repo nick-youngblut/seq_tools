@@ -24,6 +24,8 @@ echo 'source '`pwd`'/sourceMe' >> ~/.bashrc
 
 # SUPPORT AND DOCUMENTATION
 
+Main command documentation: `seq_tools -h`
+
 Each subcommand has documentation available: `seq_tools [subcommand] -h`
 
 
