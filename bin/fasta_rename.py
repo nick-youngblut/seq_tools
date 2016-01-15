@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-fasta_rename.py: rename sequences in a fasta file
+fasta_rename.py: rename sequences in a fasta file (fuzzy matches allowed)
 
 Usage:
   fasta_rename.py [options] <fasta_file> <mapping_file>
@@ -17,8 +17,7 @@ Options:
 
 Description:
   Re-name a fasta file using a mapping file (old_name -> new_name).
-
-  NOTE: only sequences in the mapping file will be written (others ignored).
+  Output written to STDOUT.
 """
 
 from docopt import docopt
@@ -26,32 +25,36 @@ import sys,os
 from functools import partial
 import pyfasta
 import pandas as pd
+from fuzzywuzzy import process
+
+
+def load_mapping(inFile):
+    maps = {}
+    with open(inFile, 'rb') as inFH:
+        for x in inFH:
+            y = x.rstrip().split('\t')
+            msg = 'Mapping file must have 2 columns!'
+            assert len(y) >= 2, msg
+            maps[y[0]] = y[1]
+    return maps
 
 
 def main(uargs):
     # load
     fasta = pyfasta.Fasta(uargs['<fasta_file>'])
-    df = pd.read_csv(uargs['<mapping_file>'], sep='\t', header=None)
+    maps = load_mapping(uargs['<mapping_file>'])
 
-    # assert
-    msg = 'The mapping file must have 2 columns: <old_name><tab><new_name>'
-    assert df.shape[1] >= 2, msg
-    
     # rename
-    msg = 'Sequence name "{}" not found!'
-    new_fasta = []
-    for i in xrange(df.shape[0]):        
-        old_name = df.loc[i,0]
-        new_name = df.loc[i,1]
+    msg = 'Fuzzy match: "{}" <-> "{}" (score: {})\n'
+    for name in fasta.keys():
         try:
-            seq = fasta[old_name]
+            new_name = maps[name]
         except KeyError:
-            raise KeyError, msg.format(old_name)
-        new_fasta.append([new_name,seq])
+            (m,score) = process.extractOne(name, maps.keys())
+            sys.stderr.write(msg.format(name, m, score))
+            new_name = maps[m]
 
-    # write
-    for x in new_fasta:
-        print '>{}\n{}'.format(x[0], x[1])
+        print '>{}\n{}'.format(new_name, fasta[name])
     
 
 if __name__ == '__main__':
