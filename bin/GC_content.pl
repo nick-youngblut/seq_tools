@@ -4,17 +4,17 @@
 
 =head1 NAME
 
-GC_content.pl -- Calculate the GC content of a fasta file
+GC_content -- Calculate the GC content of a fasta file
 
 =head1 SYNOPSIS
 
 =head2 pipe in fasta
 
-GC_content.pl [flags] < file.fasta > GC.txt
+GC_content [flags] < file.fasta > GC.txt
 
 =head2 multiple fasta files
 
-GC_content.pl [flags] file1.fasta file2.fasta > GC.txt 
+GC_content [flags] file1.fasta file2.fasta > GC.txt 
 
 =head2 Required flags
 

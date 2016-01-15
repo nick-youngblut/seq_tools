@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 """
-seqIntersect.py: Getting the intersection of 2 read files (just same reads in both).
+seqIntersect: Get the intersection of 2 read files (just same reads in both).
 
 Usage:
-  seqIntersect.py [options] <seq1> <seq2>
-  seqIntersect.py [options] <seq1> <seq2> <out1> <out2>
-  seqIntersect.py -h | --help
-  seqIntersect.py --version
+  seqIntersect [options] <seq1> <seq2>
+  seqIntersect [options] <seq1> <seq2> <out1> <out2>
+  seqIntersect -h | --help
+  seqIntersect --version
 
 Options:
   <seq1>         Sequence-1 file (fastq, fasta, or screedDB).

@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 """
-fasta_info.py: general info on a fasta (e.g, number of sequences, sequence length, sequence G+C)
+fasta_info: general info on a fasta (e.g, number of sequences, sequence length, sequence G+C)
 
 Usage:
-  fasta_info.py [options] <fastaFile>... 
-  fasta_info.py -h | --help
-  fasta_info.py --version
+  fasta_info [options] <fastaFile>... 
+  fasta_info -h | --help
+  fasta_info --version
 
 Options:
   <fastaFile>     Fasta file name(s). (Use '-' if from STDIN)

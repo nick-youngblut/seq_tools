@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 """
-fasta_unwrap.py: hard-wrapped fastas unwrapped (sequence is just 1 line)
+fasta_unwrap: hard-wrapped fastas unwrapped (sequence is just 1 line)
 
 Usage:
-  fasta_unwrap.py <fasta> | [-]
-  fasta_unwrap.py -h | --help
-  fasta_unwrap.py --version
+  fasta_unwrap <fasta> | [-]
+  fasta_unwrap -h | --help
+  fasta_unwrap --version
 
 Options:
   <fasta>       Fasta file name ('-' if from STDIN).

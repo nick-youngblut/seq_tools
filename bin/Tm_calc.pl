@@ -6,7 +6,7 @@ use warnings;
 
 =head1 NAME
 
-Tm_calc.pl -- calculate the melting temp of >= 1 sequence
+Tm_calc -- calculate the melting temp of >= 1 sequence
 
 =head1 VERSION
 
@@ -14,7 +14,7 @@ This is version 0.0.1
 
 =head1 USAGE
 
-    Tm_calc.pl [options]
+    Tm_calc [options]
 
 =head1 REQUIRED ARGUMENTS
 

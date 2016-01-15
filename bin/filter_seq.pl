@@ -6,7 +6,7 @@ use warnings;
 
 =head1 NAME
 
-filter_seq.pl -- Use bioperl to filter out sequences in variously formatted sequence files (output to STDOUT).
+filter_seq -- Use bioperl to filter out sequences in variously formatted sequence files (output to STDOUT).
 
 =head1 VERSION
 
@@ -14,7 +14,7 @@ This is version 0.0.1
 
 =head1 USAGE
 
-    filter_seq.pl [options]
+    filter_seq [options]
 
 =head1 REQUIRED ARGUMENTS
 

@@ -1,22 +1,28 @@
 #!/usr/bin/env python
 
 """
-fasta_rename.py: rename sequences in a fasta file (fuzzy matches allowed)
+fasta_rename: rename sequences in a fasta file (fuzzy matches allowed)
 
 Usage:
-  fasta_rename.py [options] <fasta_file> <mapping_file>
-  fasta_rename.py -h | --help
-  fasta_rename.py --version
+  fasta_rename [options] <fasta_file> <mapping_file>
+  fasta_rename -h | --help
+  fasta_rename --version
 
 Options:
   <fasta_file>     Fasta file.
   <mapping_file>   Mapping file (old_name<tab>new_name).
+  --quiet          Limit warnings. 
   --version        Show version.
   --debug          Debug mode (no parallel processing).
   -h --help        Show this screen.
 
 Description:
   Re-name a fasta file using a mapping file (old_name -> new_name).
+
+  If there is no exact match between a sequence name and a name in
+  the 'old_name' column, then fuzzy matching is used (a warning will
+  be given with the fuzzy match score).
+
   Output written to STDOUT.
 """
 
@@ -51,7 +57,8 @@ def main(uargs):
             new_name = maps[name]
         except KeyError:
             (m,score) = process.extractOne(name, maps.keys())
-            sys.stderr.write(msg.format(name, m, score))
+            if not uargs['--quiet']:
+                sys.stderr.write(msg.format(name, m, score))
             new_name = maps[m]
 
         print '>{}\n{}'.format(new_name, fasta[name])
