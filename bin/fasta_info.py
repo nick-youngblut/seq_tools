@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-fasta_info: general info on a fasta (e.g, number of sequences, sequence length, sequence G+C)
+fasta_info: general info on a fasta (eg, # of sequences, sequence length or G+C)
 
 Usage:
   fasta_info [options] <fastaFile>... 
@@ -32,6 +32,7 @@ Description:
 
 from docopt import docopt
 import sys,os
+import tempfile
 from functools import partial
 import multiprocessing as mp
 import pyfasta
@@ -90,7 +91,6 @@ def body(inFile, fasta, info, summary_info, uargs):
             break
 
     # return
-    #print tbl; sys.exit()
     tbl = [uargs['--sep'].join(x) for x in tbl]
     return tbl
 
@@ -116,9 +116,27 @@ def summary_info(fasta, info, uargs):
     return sum_info
 
 
+def rename_fasta(inFile):
+    msg1 = 'WARNING: the fasta contained duplicate sequences.'
+    msg2 = 'Making a temporary fasta with renamed sequences.'
+    sys.stderr.write('{} {}\n'.format(msg1, msg2))
+
+    temp = tempfile.NamedTemporaryFile()
+    with open(inFile, 'rb') as inFH:
+        for i,line in enumerate(inFH):
+            if line.startswith(">"):
+                line = '{}_{}\n'.format(line.rstrip(),i)
+            temp.write(line)
+    return temp
+
+
 def by_file(inFile, uargs):
     try:
         fasta = pyfasta.Fasta(inFile)
+    except pyfasta.fasta.DuplicateHeaderException:
+        tmpFile = rename_fasta(inFile)
+        fasta = pyfasta.Fasta(tmpFile.name)
+        tmpFile.close()
     except ValueError, TypeError:
         msg = 'ERROR: Could not read file: {}'
         sys.stderr.write(msg.format(inFile) + '\n')
